@@ -1,96 +1,45 @@
-<!-- <template>
+<template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
+    <loading v-model="pageLoading"></loading>
+    <x-button type="primary" @click.native='showLoad'>加载</x-button>
+    <x-button type="warn"@click.native="hideLoad">不加载</x-button>
+    <!-- <button @click='greet'>77</button> -->
+    <router-view/>
   </div>
 </template>
 
 <script>
+import { Loading, XButton } from 'vux';
+import {mapState, mapGetters, mapActions} from 'vuex';
 export default {
   name: 'index',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
-  }
+  },
+  methods:{
+    showLoad(){
+      console.log(this.$store,1)
+      this.$store.dispatch('pageState/showPageLoad')
+    },
+    hideLoad(){
+      console.log(2)
+      this.$store.dispatch('pageState/hidePageLoad')
+    },
+  },
+  computed:{
+    ...mapState({ 
+         pageLoading: state => {
+           console.log(state.pageState.pageLoading,'state.pageState.pageLoading')
+           return state.pageState.pageLoading
+         }
+      }),
+  },
+  components: {
+    Loading,
+    XButton
+  },
 }
 </script>
 
@@ -109,23 +58,4 @@ export default {
   a {
     color: #42b983;
   }
-</style> -->
-
-<template>
-  <div>
-    <group>
-      <cell title="title" value="value"></cell>
-    </group>
-  </div>
-</template>
-
-<script>
-import { Group, Cell } from 'vux'
-
-export default {
-  components: {
-    Group,
-    Cell
-  }
-}
-</script>
+</style>
