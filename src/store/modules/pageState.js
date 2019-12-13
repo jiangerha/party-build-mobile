@@ -1,5 +1,5 @@
 
-const state={
+const state = {
   pageLoading:false
 };
 const getters={
@@ -9,24 +9,23 @@ const getters={
 };
 const mutations = {
      showLoading(state){
-        state.changeLoading = true
+        state.pageLoading = true
      },
      hideLoading(state){
-        state.changeLoading = false
+        state.pageLoading = false
      },
  };
 const actions = {
     showPageLoad(context){
-      console.log('9')
         context.commit('showLoading');
     },
     hidePageLoad(context){
-      console.log('8')
       context.commit('hideLoading');
     }
 };
 export default {
      namespaced:true,
+     state,
      getters,
      mutations,
      actions
